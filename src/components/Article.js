@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import CommentList from "./CommentList";
 
 class Article extends React.Component {
 
@@ -23,6 +25,7 @@ class Article extends React.Component {
                 <div>
                     <div>{this.props.article.text}</div>
                     <h3>{this.props.article.date}</h3>
+                    <CommentList comments={this.props.article.commentItems || []}/>
                 </div>
             );
         }
@@ -36,6 +39,15 @@ class Article extends React.Component {
             </div>
         );
     };
+};
+
+Article.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        date: PropTypes.string,
+        commentItems: PropTypes.array
+    }).isRequired
 };
 
 export default Article;

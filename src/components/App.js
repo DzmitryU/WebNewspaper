@@ -1,12 +1,14 @@
 import React from 'react'
 import ArticleList from './ArticleList'
+import CommentService from '../services/CommentService'
 
-import { articles } from '../data/mock'
+import { articles, comments } from '../data/mock'
 
 function App() {
+    const commentedArticles = CommentService.fillArticles(articles, comments);
     return (
         <ArticleList
-            articles={articles}
+            articles={commentedArticles}
         />
     )
 }
