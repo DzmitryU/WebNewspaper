@@ -1,8 +1,13 @@
 import React from 'react'
+import ArticleList from './ArticleList'
+
+import { articles } from '../data/mock'
 
 function App() {
     return (
-        <div>Hello world!</div>
+        <ArticleList
+            articles={articles}
+        />
     )
 }
 
