@@ -9,7 +9,8 @@ class Article extends React.Component {
 
         this.state = {
             isOpen: true
-        }
+        };
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
     handleButtonClick = () => {
