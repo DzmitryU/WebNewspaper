@@ -20,18 +20,13 @@ class Article extends React.Component {
     };
 
     getBody = () => {
-        if (this.state.isOpen) {
-            return (
-                <div>
-                    <div>{this.props.article.text}</div>
-                    <h3>{this.props.article.date}</h3>
-                    <CommentList comments={this.props.article.commentItems || []}/>
-                </div>
-            );
-
-        } else {
-            return '';
-        }
+        return this.state.isOpen ? (
+            <div>
+                <div>{this.props.article.text}</div>
+                <h3>{this.props.article.date}</h3>
+                <CommentList comments={this.props.article.commentItems}/>
+            </div>)
+            : null;
     };
 
     render() {

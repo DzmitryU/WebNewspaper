@@ -16,22 +16,21 @@ class CommentList extends React.Component {
     };
 
     getBody = () => {
-        if (this.state.isOpen) {
-            const commentElements = this.props.comments.map((comment) => {
-                return (
-                    <li key={comment.id}>
-                        <Comment comment={comment}/>
-                    </li>
-                )
-            });
-            return (
-                <ul>
-                    {commentElements}
-                </ul>
-            );
-        } else {
-            return '';
+        if (!this.state.isOpen) {
+            return null;
         }
+        const commentElements = this.props.comments.map((comment) => {
+            return (
+                <li key={comment.id}>
+                    <Comment comment={comment}/>
+                </li>
+            )
+        });
+        return (
+            <ul>
+                {commentElements}
+            </ul>
+        );
     };
 
     render() {
@@ -46,6 +45,10 @@ class CommentList extends React.Component {
             </div>
         );
     };
+};
+
+CommentList.defaultProps = {
+    comments: []
 };
 
 export default CommentList;
