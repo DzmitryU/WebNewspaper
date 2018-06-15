@@ -19,7 +19,7 @@ class Article extends React.Component {
         })
     };
 
-    getBody = () =>{
+    getBody = () => {
         if (this.state.isOpen) {
             return (
                 <div>
