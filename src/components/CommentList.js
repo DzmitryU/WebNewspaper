@@ -15,8 +15,7 @@ class CommentList extends React.Component {
         });
     };
 
-    render() {
-        let body = '';
+    getBody = () => {
         if (this.state.isOpen) {
             const commentElements = this.props.comments.map((comment) => {
                 return (
@@ -25,12 +24,18 @@ class CommentList extends React.Component {
                     </li>
                 )
             });
-            body = (
+            return (
                 <ul>
                     {commentElements}
                 </ul>
             );
+        } else {
+            return '';
         }
+    };
+
+    render() {
+        const body = this.getBody();
 
         return (
             <div>
