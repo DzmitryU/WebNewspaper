@@ -6,21 +6,10 @@ class Article extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            isOpen: true
-        };
-        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
-    handleButtonClick = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    };
-
     getBody = () => {
-        return this.state.isOpen ? (
+        return this.props.isOpen ? (
             <div>
                 <div>{this.props.article.text}</div>
                 <h3>{this.props.article.date}</h3>
@@ -35,7 +24,7 @@ class Article extends React.Component {
             <div>
                 <h1>
                     {this.props.article.title}
-                    <button onClick={this.handleButtonClick}>{this.state.isOpen ? 'Close' : 'Open'}</button>
+                    <button onClick={this.props.toggleOpen}>{this.props.isOpen ? 'Close' : 'Open'}</button>
                 </h1>
                 {body}
             </div>
