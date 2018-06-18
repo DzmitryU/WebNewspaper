@@ -10,7 +10,7 @@ class ArticleList extends React.Component {
                     <Article
                         article={article}
                         isOpen={article.id === this.props.openItemId}
-                        toggleOpen={() => this.props.toggleOpenItem(article.id)}
+                        toggleOpen={this.props.toggleOpenItem(article.id)}
                     />
                 </li>
             )
