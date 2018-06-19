@@ -28,7 +28,7 @@ class ArticleList extends React.Component {
 
 ArticleList.propTypes = {
     articles: PropTypes.array,
-    openItemId: PropTypes.string.isRequired,
+    openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired
 };
 
