@@ -1,6 +1,7 @@
 import React from 'react';
 import Comment from './Comment';
 import ToggleOpen from '../decorators/toggleOpen';
+import PropTypes from 'prop-types';
 
 class CommentList extends React.Component {
     getBody = () => {
@@ -33,6 +34,10 @@ class CommentList extends React.Component {
             </div>
         );
     };
+};
+
+CommentList.propTypes = {
+    comments: PropTypes.array
 };
 
 CommentList.defaultProps = {

@@ -40,7 +40,9 @@ Article.propTypes = {
         text: PropTypes.string.isRequired,
         date: PropTypes.string,
         commentItems: PropTypes.array
-    }).isRequired
+    }).isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    toggleOpen: PropTypes.func.isRequired
 };
 
 export default Article;

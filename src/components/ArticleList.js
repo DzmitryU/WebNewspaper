@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Article from './Article';
 import Accordion from "../decorators/accordion";
 
@@ -22,6 +24,16 @@ class ArticleList extends React.Component {
             </ul>
         );
     };
+};
+
+ArticleList.propTypes = {
+    articles: PropTypes.array,
+    openItemId: PropTypes.string.isRequired,
+    toggleOpenItem: PropTypes.func.isRequired
+};
+
+ArticleList.defaultProps = {
+    articles: []
 };
 
 export default Accordion(ArticleList);
