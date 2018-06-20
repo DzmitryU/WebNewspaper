@@ -12,8 +12,7 @@ export default Component => class WrappedComponent extends React.Component {
         return <Component {...this.props} toggleOpen = {this.toggleOpen} {...this.state}/>
     };
 
-    toggleOpen = ev => {
-        ev && (ev.preventDefault() || ev.stopPropagation());
+    toggleOpen = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
