@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentList from "./CommentList";
+import CommentList from './CommentList';
 
 class Article extends React.Component {
 
