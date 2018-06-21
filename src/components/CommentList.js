@@ -3,37 +3,35 @@ import Comment from './Comment';
 import ToggleOpen from '../decorators/toggleOpen';
 import PropTypes from 'prop-types';
 
-class CommentList extends React.Component {
-    getBody = () => {
-        if (!this.props.isOpen) {
-            return null;
-        }
-        const commentElements = this.props.comments.map((comment) => {
-            return (
-                <li key={comment.id}>
-                    <Comment comment={comment}/>
-                </li>
-            )
-        });
+function getBody(comments, isOpen) {
+    if (!isOpen) {
+        return null;
+    }
+    const commentElements = comments.map((comment) => {
         return (
-            <ul>
-                {commentElements}
-            </ul>
-        );
-    };
+            <li key={comment.id}>
+                <Comment comment={comment}/>
+            </li>
+        )
+    });
+    return (
+        <ul>
+            {commentElements}
+        </ul>
+    );
+};
 
-    render() {
-        const body = this.getBody();
+function CommentList (props) {
+    const body = getBody(props.comments, props.isOpen);
+    return (
+        <div>
+            <button onClick={props.toggleOpen}>
+                {props.isOpen ? 'Hide comments' : 'Show comments'}
+            </button>
+            {body}
+        </div>
+    );
 
-        return (
-            <div>
-                <button onClick={this.props.toggleOpen}>
-                    {this.props.isOpen ? 'Hide comments' : 'Show comments'}
-                </button>
-                {body}
-            </div>
-        );
-    };
 };
 
 CommentList.propTypes = {

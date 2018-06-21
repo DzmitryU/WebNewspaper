@@ -2,36 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CommentList from './CommentList';
 
-class Article extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    getBody = () => {
-        return this.props.isOpen ? (
+function getBody (article, isOpen) {
+    return isOpen ? (
             <div>
-                <div>{this.props.article.text}</div>
-                <h3>{this.props.article.date}</h3>
-                <CommentList comments={this.props.article.commentItems}/>
+                <div>{article.text}</div>
+                <h3>{article.date}</h3>
+                <CommentList comments={article.commentItems}/>
             </div>)
-            : null;
-    };
+        : null;
+};
 
-    render() {
-        const body = this.getBody();
-        return (
-            <div>
-                <h1>
-                    {this.props.article.title}
-                    <button onClick={this.props.toggleOpen}>
-                        {this.props.isOpen ? 'Close' : 'Open'}
-                    </button>
-                </h1>
-                {body}
-            </div>
-        );
-    };
+function Article (props) {
+
+    const body = getBody(props.article, props.isOpen);
+    return (
+        <div>
+            <h1>
+                {props.article.title}
+                <button onClick={props.toggleOpen}>
+                    {props.isOpen ? 'Close' : 'Open'}
+                </button>
+            </h1>
+            {body}
+        </div>
+    );
 };
 
 Article.propTypes = {
