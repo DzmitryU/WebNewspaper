@@ -1,51 +1,45 @@
 import React from 'react';
 import Comment from './Comment';
+import ToggleOpen from '../decorators/toggleOpen';
+import PropTypes from 'prop-types';
 
-class CommentList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isOpen: true
-        };
+function getBody(comments, isOpen) {
+    if (!isOpen) {
+        return null;
     }
-
-    handleButtonClick = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    };
-
-    getBody = () => {
-        if (this.state.isOpen) {
-            const commentElements = this.props.comments.map((comment) => {
-                return (
-                    <li key={comment.id}>
-                        <Comment comment={comment}/>
-                    </li>
-                )
-            });
-            return (
-                <ul>
-                    {commentElements}
-                </ul>
-            );
-        } else {
-            return '';
-        }
-    };
-
-    render() {
-        const body = this.getBody();
-
+    const commentElements = comments.map((comment) => {
         return (
-            <div>
-                <button onClick={this.handleButtonClick}>
-                    {this.state.isOpen ? 'Hide comments' : 'Show comments'}
-                </button>
-                {body}
-            </div>
-        );
-    };
+            <li key={comment.id}>
+                <Comment comment={comment}/>
+            </li>
+        )
+    });
+    return (
+        <ul>
+            {commentElements}
+        </ul>
+    );
 };
 
-export default CommentList;
+function CommentList (props) {
+    const body = getBody(props.comments, props.isOpen);
+    return (
+        <div>
+            <button onClick={props.toggleOpen}>
+                {props.isOpen ? 'Hide comments' : 'Show comments'}
+            </button>
+            {body}
+        </div>
+    );
+
+};
+
+CommentList.propTypes = {
+    comments: PropTypes.array
+};
+
+CommentList.defaultProps = {
+    comments: []
+};
+
+export default ToggleOpen(CommentList);

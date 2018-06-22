@@ -1,22 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Article from './Article';
+import Accordion from '../decorators/accordion';
 
-class ArticleList extends React.Component {
-    render() {
-        const articleElements = this.props.articles.map((article) => {
-            return (
-                <li key={article.id}>
-                    <Article article={article}/>
-                </li>
-            )
-        });
+function getArticleElement(article, openItemId, toggleOpenItem) {
+    return (
+        <li key={article.id}>
+            <Article
+                article={article}
+                isOpen={article.id === openItemId}
+                toggleOpen={toggleOpenItem(article.id)}
+            />
+        </li>
+    );
+}
 
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        );
-    };
+function ArticleList(props) {
+    const articleElements =
+        props.articles.map((article) => getArticleElement(article, props.openItemId, props.toggleOpenItem));
+
+    return (
+        <ul>
+            {articleElements}
+        </ul>
+    );
 };
 
-export default ArticleList;
+ArticleList.propTypes = {
+    articles: PropTypes.array,
+    openItemId: PropTypes.string,
+    toggleOpenItem: PropTypes.func.isRequired
+};
+
+ArticleList.defaultProps = {
+    articles: []
+};
+
+export default Accordion(ArticleList);

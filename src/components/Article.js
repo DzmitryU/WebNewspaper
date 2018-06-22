@@ -1,51 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentList from "./CommentList";
+import CommentList from './CommentList';
 
-class Article extends React.Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isOpen: true
-        };
-        this.handleButtonClick = this.handleButtonClick.bind(this);
-    }
-
-    handleButtonClick = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    };
-
-    getBody = () => {
-        if (this.state.isOpen) {
-            return (
-                <div>
-                    <div>{this.props.article.text}</div>
-                    <h3>{this.props.article.date}</h3>
-                    <CommentList comments={this.props.article.commentItems || []}/>
-                </div>
-            );
-
-        } else {
-            return '';
-        }
-    };
-
-    render() {
-        const body = this.getBody();
-        return (
+function getBody (article, isOpen) {
+    return isOpen ? (
             <div>
-                <h1>
-                    {this.props.article.title}
-                    <button onClick={this.handleButtonClick}>{this.state.isOpen ? 'Close' : 'Open'}</button>
-                </h1>
-                {body}
-            </div>
-        );
-    };
+                <div>{article.text}</div>
+                <h3>{article.date}</h3>
+                <CommentList comments={article.commentItems}/>
+            </div>)
+        : null;
+};
+
+function Article (props) {
+
+    const body = getBody(props.article, props.isOpen);
+    return (
+        <div>
+            <h1>
+                {props.article.title}
+                <button onClick={props.toggleOpen}>
+                    {props.isOpen ? 'Close' : 'Open'}
+                </button>
+            </h1>
+            {body}
+        </div>
+    );
 };
 
 Article.propTypes = {
@@ -54,7 +34,9 @@ Article.propTypes = {
         text: PropTypes.string.isRequired,
         date: PropTypes.string,
         commentItems: PropTypes.array
-    }).isRequired
+    }).isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    toggleOpen: PropTypes.func.isRequired
 };
 
 export default Article;
