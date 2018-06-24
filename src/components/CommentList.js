@@ -1,7 +1,9 @@
 import React from 'react';
-import Comment from './Comment';
-import ToggleOpen from '../decorators/toggleOpen';
 import PropTypes from 'prop-types';
+import ToggleOpen from '../decorators/toggleOpen';
+
+import Comment from './Comment';
+import CommentForm from './CommentForm';
 
 function getBody(comments, isOpen) {
     if (!isOpen) {
@@ -15,9 +17,12 @@ function getBody(comments, isOpen) {
         )
     });
     return (
-        <ul>
-            {commentElements}
-        </ul>
+        <div>
+            <ul>
+                {commentElements}
+            </ul>
+            <CommentForm/>
+        </div>
     );
 };
 
