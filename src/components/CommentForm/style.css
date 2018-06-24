@@ -1,0 +1,8 @@
+.CommentForm input {
+    margin: 2px 20px;
+}
+
+.CommentInputText input {
+    width: 50%;
+    height: 5rem;
+}

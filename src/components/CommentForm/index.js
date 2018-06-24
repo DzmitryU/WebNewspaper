@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.css';
 
 class CommentForm extends React.Component {
     constructor(props) {
@@ -25,12 +26,14 @@ class CommentForm extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="CommentForm">
                 <section>
-                    User: <input type='text' value={this.state.user} onChange={this.handleChangeUser}/>
+                    User:
+                    <p><input type='text' value={this.state.user} onChange={this.handleChangeUser}/></p>
                 </section>
                 <section>
-                    Text: <p><input type='text' value={this.state.text} onChange={this.handleChangeText}/></p>
+                    Text:
+                    <p className='CommentInputText'><input type='text' value={this.state.text} onChange={this.handleChangeText}/></p>
                 </section>
                 <button>Submit</button>
             </div>
