@@ -22,13 +22,22 @@ class DateRangePicker extends React.Component{
         const { from, to } = this.state;
         const modifiers = { start: from, end: to };
 
+        const description = (from && to) ?
+            `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}` :
+            'Date Range was not selected';
+
         return (
-            <DayPicker
-                className="Selectable"
-                selectedDays={[from, { from, to }]}
-                modifiers={modifiers}
-                onDayClick={this.handleDayClick}
-            />
+            <div>
+                <p>
+                    {description}
+                </p>
+                <DayPicker
+                    className="Selectable"
+                    selectedDays={[from, { from, to }]}
+                    modifiers={modifiers}
+                    onDayClick={this.handleDayClick}
+                />
+            </div>
         );
     }
 }
