@@ -2,7 +2,13 @@
     margin: 2px 20px;
 }
 
-.CommentInputText input {
+.CommentForm .InvalidInput {
+    border-color: red;
+}
+
+.CommentInputText input, textarea {
     width: 50%;
     height: 5rem;
 }
+
+
