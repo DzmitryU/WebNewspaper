@@ -1,7 +1,8 @@
 import React from 'react'
 import ArticleList from './ArticleList'
 import CommentService from '../services/CommentService'
-import DateRangePicker from './DateRangePicker'
+import DateRangePicker from './Filters/DateRangePicker'
+import ArticleSelect from './Filters/ArticleSelect'
 
 import { articles, comments } from '../data/mock'
 
@@ -10,6 +11,7 @@ function App() {
     return (
         <div>
             <DateRangePicker/>
+            <ArticleSelect articles={articles}/>
             <ArticleList
                 articles={commentedArticles}
             />
