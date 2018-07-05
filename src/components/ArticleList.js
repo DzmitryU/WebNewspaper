@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import {connect} from 'react-redux';
+import {loadAllArticles} from '../ac';
 
 import Article from './Article';
 import Accordion from '../decorators/accordion';
-import {LOAD_ALL_ARTICLES} from "../constants";
 
-import { articles, comments } from '../data/mock';
+import {articles, comments} from '../data/mock';
 import CommentService from '../services/CommentService';
 
 
@@ -67,10 +67,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadArticles: (articles) =>
-            dispatch({
-                type: LOAD_ALL_ARTICLES,
-                payload: articles
-            })
+            dispatch(loadAllArticles(articles))
     }
 };
 
