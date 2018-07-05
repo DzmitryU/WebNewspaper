@@ -1,11 +1,11 @@
-import {STORE_ALL_ARTICLES} from '../constants';
+import {LOAD_ALL_ARTICLES} from '../constants';
 
-export default (articleState = [], action) => {
+export default (articlesState = [], action) => {
     switch (action.type) {
-        case STORE_ALL_ARTICLES: {
-            articleState = action.payload.slice(0);
+        case LOAD_ALL_ARTICLES: {
+            articlesState = action.payload.slice(0);
             break;
         }
     }
-    return articleState;
+    return articlesState;
 }

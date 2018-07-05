@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 
 import Article from './Article';
 import Accordion from '../decorators/accordion';
+import {LOAD_ALL_ARTICLES} from "../constants";
+
+import { articles, comments } from '../data/mock';
+import CommentService from '../services/CommentService';
+
 
 function getArticleElement(article, openItemId, toggleOpenItem) {
     return (
@@ -16,15 +22,30 @@ function getArticleElement(article, openItemId, toggleOpenItem) {
     );
 }
 
-function ArticleList(props) {
-    const articleElements =
-        props.articles.map((article) => getArticleElement(article, props.openItemId, props.toggleOpenItem));
+class ArticleList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    return (
-        <ul>
-            {articleElements}
-        </ul>
-    );
+    componentDidMount() {
+        const commentedArticles = CommentService.fillArticles(articles, comments);
+        this.props.loadArticles(commentedArticles);
+    }
+
+    shou
+
+    render() {
+        const articleElements =
+            this.props.articles.map(
+                (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
+            );
+
+        return (
+            <ul>
+                {articleElements}
+            </ul>
+        );
+    }
 };
 
 ArticleList.propTypes = {
@@ -37,4 +58,23 @@ ArticleList.defaultProps = {
     articles: []
 };
 
-export default Accordion(ArticleList);
+const mapStateToProps = state => {
+    return {
+        articles: state.articles
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadArticles: (articles) =>
+            dispatch({
+                type: LOAD_ALL_ARTICLES,
+                payload: articles
+            })
+    }
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Accordion(ArticleList));

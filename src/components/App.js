@@ -15,9 +15,7 @@ function App() {
             <div>
                 <DateRangePicker/>
                 <ArticleSelect articles={articles}/>
-                <ArticleList
-                    articles={commentedArticles}
-                />
+                <ArticleList/>
             </div>
         </Provider>
     );
