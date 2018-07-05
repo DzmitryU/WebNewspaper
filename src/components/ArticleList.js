@@ -32,8 +32,6 @@ class ArticleList extends React.Component {
         this.props.loadArticles(commentedArticles);
     }
 
-    shou
-
     render() {
         const articleElements =
             this.props.articles.map(
