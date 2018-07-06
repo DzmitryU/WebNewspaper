@@ -9,13 +9,19 @@ export default (filterState = DEFAULT_FILTER_STATE, action) => {
     switch (action.type) {
         case ADD_DATE_RANGE: {
             const {from, to} = action.payload.dateRange;
-            filterState.dateRange.from = from || filterState.dateRange.from;
-            filterState.dateRange.to = to || filterState.dateRange.to;
-            break;
+            return {
+                ...filterState,
+                dateRange: {
+                    from: from || filterState.dateRange.from,
+                    to: to || filterState.dateRange.to
+                }
+            }
         }
         case SELECT_ARTICLES: {
-            filterState.selectedArticles = action.payload.selectedArticles.slice(0);
-            break;
+            return {
+                ...filterState,
+                selectedArticles: action.payload.selectedArticles.slice(0)
+            }
         }
     }
     return filterState;
