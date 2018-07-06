@@ -22,6 +22,24 @@ function getArticleElement(article, openItemId, toggleOpenItem) {
     );
 }
 
+function validSelected(articles, article) {
+    return (
+        articles.length == 0 ||
+        articles.includes(article.id)
+    );
+}
+
+function validDateRange(range, article) {
+    return (
+        !range.from ||
+        !range.to ||
+        (
+            (Date.parse(range.from) <= Date.parse(article.date)) &&
+            (Date.parse(range.to) >= Date.parse(article.date))
+        )
+    )
+}
+
 class ArticleList extends React.Component {
     constructor(props) {
         super(props);
@@ -34,9 +52,18 @@ class ArticleList extends React.Component {
 
     render() {
         const articleElements =
-            this.props.articles.map(
-                (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
-            );
+            this.props.articles
+                .filter(
+                    (article) => {
+                        return (
+                            validSelected(this.props.selectedArticlesValues, article) &&
+                            validDateRange(this.props.dateRange, article)
+                        );
+                    }
+                )
+                .map(
+                    (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
+                );
 
         return (
             <ul>
@@ -49,16 +76,21 @@ class ArticleList extends React.Component {
 ArticleList.propTypes = {
     articles: PropTypes.array,
     openItemId: PropTypes.string,
-    toggleOpenItem: PropTypes.func.isRequired
+    toggleOpenItem: PropTypes.func.isRequired,
+    selectedArticlesValues: PropTypes.array,
+    dateRange: PropTypes.object.isRequired
 };
 
 ArticleList.defaultProps = {
-    articles: []
+    articles: [],
+    selectedArticlesValues: []
 };
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles
+        articles: state.articles,
+        selectedArticlesValues: state.filter.selectedArticles.map(article => article.value),
+        dateRange: state.filter.dateRange
     };
 };
 
