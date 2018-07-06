@@ -1,4 +1,4 @@
-import {ADD_DATE_RANGE, SELECT_ARTICLES} from '../constants';
+import {SET_DATE_RANGE, SELECT_ARTICLES} from '../constants';
 
 const DEFAULT_FILTER_STATE = {
     dateRange: {from: null, to: null},
@@ -7,7 +7,7 @@ const DEFAULT_FILTER_STATE = {
 
 export default (filterState = DEFAULT_FILTER_STATE, action) => {
     switch (action.type) {
-        case ADD_DATE_RANGE: {
+        case SET_DATE_RANGE: {
             const {from, to} = action.payload.dateRange;
             return {
                 ...filterState,

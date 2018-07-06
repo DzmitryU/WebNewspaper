@@ -1,4 +1,4 @@
-import {LOAD_ALL_ARTICLES, SELECT_ARTICLES} from "../constants";
+import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE} from "../constants";
 
 export function loadAllArticles(articles) {
     return {
@@ -11,5 +11,12 @@ export function selectArticles(articles) {
     return {
         type: SELECT_ARTICLES,
         payload: {selectedArticles: articles}
+    }
+};
+
+export function setDateRange(range) {
+    return {
+        type: SET_DATE_RANGE,
+        payload: {dateRange: range}
     }
 };
