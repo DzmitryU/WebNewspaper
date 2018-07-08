@@ -1,19 +1,17 @@
-import React from 'react'
-import ArticleList from './ArticleList'
-import CommentService from '../services/CommentService'
-import DateRangePicker from './DateRangePicker'
-
-import { articles, comments } from '../data/mock'
+import React from 'react';
+import store from '../store';
+import {Provider} from 'react-redux';
+import ArticleList from './ArticleList';
+import Filter from './Filters';
 
 function App() {
-    const commentedArticles = CommentService.fillArticles(articles, comments);
     return (
-        <div>
-            <DateRangePicker/>
-            <ArticleList
-                articles={commentedArticles}
-            />
-        </div>
+        <Provider store={store}>
+            <div>
+                <Filter/>
+                <ArticleList/>
+            </div>
+        </Provider>
     );
 }
 
