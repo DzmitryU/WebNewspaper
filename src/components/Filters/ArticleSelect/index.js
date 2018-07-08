@@ -47,8 +47,8 @@ ArticleSelect.propTypes = {
     ),
     selectedArticles: PropTypes.arrayOf(
         PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
         })
     ),
     selectArticles: PropTypes.func.isRequired

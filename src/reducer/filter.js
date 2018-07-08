@@ -20,7 +20,7 @@ export default (filterState = DEFAULT_FILTER_STATE, action) => {
         case SELECT_ARTICLES: {
             return {
                 ...filterState,
-                selectedArticles: action.payload.selectedArticles.slice(0)
+                selectedArticles: [...action.payload.selectedArticles]
             }
         }
     }

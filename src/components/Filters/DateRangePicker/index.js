@@ -1,6 +1,7 @@
 import React from 'react';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import 'react-day-picker/lib/style.css';
 import './style.css';
@@ -42,7 +43,8 @@ class DateRangePicker extends React.Component{
 };
 
 DateRangePicker.propTypes = {
-
+    from: PropTypes.instanceOf(Date),
+    to: PropTypes.instanceOf(Date),
 };
 
 const mapStateToProps = state => {
@@ -52,10 +54,9 @@ const mapStateToProps = state => {
     }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
+const mapDispatchToProps = dispatch => (
+    {
         setDateRange: (range) => dispatch(setDateRange(range))
-    }
-};
+    });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateRangePicker);
