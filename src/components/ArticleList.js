@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {loadAllArticles} from '../ac';
+import moment from 'moment';
 
+import {loadAllArticles} from '../ac';
 import Article from './Article';
 import Accordion from '../decorators/accordion';
 
@@ -34,8 +35,8 @@ function validDateRange(range, article) {
         !range.from ||
         !range.to ||
         (
-            (Date.parse(range.from) <= Date.parse(article.date)) &&
-            (Date.parse(range.to) >= Date.parse(article.date))
+            moment(range.from).isBefore(article.date) &&
+            moment(range.to).isAfter(article.date)
         )
     )
 }
