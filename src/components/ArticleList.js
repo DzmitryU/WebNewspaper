@@ -53,18 +53,9 @@ class ArticleList extends React.Component {
 
     render() {
         const articleElements =
-            this.props.articles
-                .filter(
-                    (article) => {
-                        return (
-                            validSelected(this.props.selectedArticlesValues, article) &&
-                            validDateRange(this.props.dateRange, article)
-                        );
-                    }
-                )
-                .map(
-                    (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
-                );
+            this.props.articles.map(
+                (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
+            );
 
         return (
             <ul>
@@ -77,21 +68,23 @@ class ArticleList extends React.Component {
 ArticleList.propTypes = {
     articles: PropTypes.array,
     openItemId: PropTypes.string,
-    toggleOpenItem: PropTypes.func.isRequired,
-    selectedArticlesValues: PropTypes.array,
-    dateRange: PropTypes.object.isRequired
+    toggleOpenItem: PropTypes.func.isRequired
 };
 
 ArticleList.defaultProps = {
-    articles: [],
-    selectedArticlesValues: []
+    articles: []
 };
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles,
-        selectedArticlesValues: state.filter.selectedArticles.map(article => article.value),
-        dateRange: state.filter.dateRange
+        articles: state.articles.filter(
+            (article) => {
+                return (
+                    validSelected(state.filter.selectedArticles, article) &&
+                    validDateRange(state.filter.dateRange, article)
+                );
+            }
+        )
     };
 };
 

@@ -14,7 +14,7 @@ class ArticleSelect extends React.Component {
     };
 
     handleChange = (articles) => {
-        this.props.selectArticles(articles);
+        this.props.selectArticles(articles.map(article => article.value));
     };
 
     articlesToOptions = (articles) => {
@@ -45,12 +45,7 @@ ArticleSelect.propTypes = {
             text: PropTypes.string.isRequired,
         })
     ),
-    selectedArticles: PropTypes.arrayOf(
-        PropTypes.shape({
-            value: PropTypes.string.isRequired,
-            label: PropTypes.string.isRequired,
-        })
-    ),
+    selectedArticles: PropTypes.arrayOf(PropTypes.string),
     selectArticles: PropTypes.func.isRequired
 };
 
