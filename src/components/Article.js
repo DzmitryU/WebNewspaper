@@ -7,7 +7,7 @@ function getBody (article, isOpen) {
             <div>
                 <div>{article.text}</div>
                 <h3>{article.date}</h3>
-                <CommentList comments={article.commentItems}/>
+                <CommentList comments={article.comments}/>
             </div>)
         : null;
 };
@@ -33,7 +33,7 @@ Article.propTypes = {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         date: PropTypes.string,
-        commentItems: PropTypes.array
+        comments: PropTypes.arrayOf(PropTypes.string)
     }).isRequired,
     isOpen: PropTypes.bool.isRequired,
     toggleOpen: PropTypes.func.isRequired

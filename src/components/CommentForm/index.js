@@ -12,7 +12,6 @@ class CommentForm extends React.Component {
         };
         this.handleChangeText = this.handleChangeText.bind(this);
         this.handleChangeUser = this.handleChangeUser.bind(this);
-        console.log(COMMENT_RULES);
     }
 
     handleChangeUser = (ev) => {
@@ -36,7 +35,6 @@ class CommentForm extends React.Component {
     };
 
     isTextValid = (text) => {
-        console.log(text.length);
         return this.validate(text, COMMENT_RULES.TEXT);
     };
 

@@ -8,8 +8,6 @@ import Article from './Article';
 import Accordion from '../decorators/accordion';
 
 import {articles, comments} from '../data/mock';
-import CommentService from '../services/CommentService';
-
 
 function getArticleElement(article, openItemId, toggleOpenItem) {
     return (
@@ -47,8 +45,7 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount() {
-        const commentedArticles = CommentService.fillArticles(articles, comments);
-        this.props.loadArticles(commentedArticles);
+        this.props.loadArticles(articles);
         this.props.loadComments(comments);
     }
 

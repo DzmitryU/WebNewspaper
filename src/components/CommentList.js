@@ -9,10 +9,10 @@ function getBody(comments, isOpen) {
     if (!isOpen) {
         return null;
     }
-    const commentElements = comments.map((comment) => {
+    const commentElements = comments.map((id) => {
         return (
-            <li key={comment.id}>
-                <Comment comment={comment}/>
+            <li key={id}>
+                <Comment commentId={id}/>
             </li>
         )
     });
@@ -40,7 +40,7 @@ function CommentList (props) {
 };
 
 CommentList.propTypes = {
-    comments: PropTypes.array
+    comments: PropTypes.arrayOf(PropTypes.string)
 };
 
 CommentList.defaultProps = {

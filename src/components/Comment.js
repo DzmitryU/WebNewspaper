@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-Comment.propTypes = {
-    comment: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        user: PropTypes.string,
-    })
-};
-
-export default function Comment(props) {
+function Comment(props) {
+    console.log('render comment: ', props.comment.id);
     return (
         <div>
             <div>{props.comment.text}</div>
@@ -16,3 +11,19 @@ export default function Comment(props) {
         </div>
     );
 };
+
+Comment.propTypes = {
+    commentId: PropTypes.string,
+    comment: PropTypes.shape({
+        text: PropTypes.string.isRequired,
+        user: PropTypes.string,
+    })
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        comment: state.comments.find(comment => comment.id === ownProps.commentId)
+    }
+};
+
+export default connect(mapStateToProps)(Comment);
