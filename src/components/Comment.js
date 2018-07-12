@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {commentSelectorFactory} from '../selectors';
 
 class Comment extends React.Component {
     constructor(props) {
@@ -27,8 +28,9 @@ Comment.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+    const commentSelector = commentSelectorFactory();
     return {
-        comment: state.comments.find(comment => comment.id === ownProps.commentId)
+        comment: commentSelector(state, ownProps)
     }
 };
 
