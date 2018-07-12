@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import moment from 'moment';
 
-import {loadAllArticles} from '../ac';
+import {loadAllArticles, loadComments} from '../ac';
 import Article from './Article';
 import Accordion from '../decorators/accordion';
 
@@ -49,6 +49,7 @@ class ArticleList extends React.Component {
     componentDidMount() {
         const commentedArticles = CommentService.fillArticles(articles, comments);
         this.props.loadArticles(commentedArticles);
+        this.props.loadComments(comments);
     }
 
     render() {
@@ -68,7 +69,9 @@ class ArticleList extends React.Component {
 ArticleList.propTypes = {
     articles: PropTypes.array,
     openItemId: PropTypes.string,
-    toggleOpenItem: PropTypes.func.isRequired
+    toggleOpenItem: PropTypes.func.isRequired,
+    loadAllArticles: PropTypes.func,
+    loadArticles: PropTypes.func
 };
 
 ArticleList.defaultProps = {
@@ -91,7 +94,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadArticles: (articles) =>
-            dispatch(loadAllArticles(articles))
+            dispatch(loadAllArticles(articles)),
+        loadComments: (comments) =>
+            dispatch(loadComments(comments))
     }
 };
 

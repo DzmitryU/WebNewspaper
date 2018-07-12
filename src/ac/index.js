@@ -1,9 +1,9 @@
-import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE} from "../constants";
+import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS} from '../constants';
 
 export function loadAllArticles(articles) {
     return {
         type: LOAD_ALL_ARTICLES,
-        payload: {articles: articles}
+        payload: {articles}
     }
 };
 
@@ -11,6 +11,13 @@ export function selectArticles(articles) {
     return {
         type: SELECT_ARTICLES,
         payload: {selectedArticles: articles}
+    }
+};
+
+export function loadComments(comments) {
+    return {
+        type: LOAD_COMMENTS,
+        payload: {comments}
     }
 };
 
