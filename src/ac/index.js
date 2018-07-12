@@ -1,4 +1,10 @@
-import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS} from '../constants';
+import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT} from '../constants';
+
+export function increment() {
+    return {
+        type: INCREMENT
+    }
+}
 
 export function loadAllArticles(articles) {
     return {
