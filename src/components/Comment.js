@@ -2,14 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-function Comment(props) {
-    console.log('render comment: ', props.comment.id);
-    return (
-        <div>
-            <div>{props.comment.text}</div>
-            <h4>{props.comment.user}</h4>
-        </div>
-    );
+class Comment extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        console.log('render comment: ', this.props.comment.id);
+        return (
+            <div>
+                <div>{this.props.comment.text}</div>
+                <h4>{this.props.comment.user}</h4>
+            </div>
+        );
+    }
 };
 
 Comment.propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import moment from 'moment';
+import {filtratedArticlesSelector} from '../selectors'
 
 import {loadAllArticles, loadComments} from '../ac';
 import Article from './Article';
@@ -21,24 +21,6 @@ function getArticleElement(article, openItemId, toggleOpenItem) {
     );
 }
 
-function validSelected(articles, article) {
-    return (
-        articles.length == 0 ||
-        articles.includes(article.id)
-    );
-}
-
-function validDateRange(range, article) {
-    return (
-        !range.from ||
-        !range.to ||
-        (
-            moment(range.from).isBefore(article.date) &&
-            moment(range.to).isAfter(article.date)
-        )
-    )
-}
-
 class ArticleList extends React.Component {
     constructor(props) {
         super(props);
@@ -50,6 +32,7 @@ class ArticleList extends React.Component {
     }
 
     render() {
+        console.log('Update Article List');
         const articleElements =
             this.props.articles.map(
                 (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
@@ -77,14 +60,7 @@ ArticleList.defaultProps = {
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles.filter(
-            (article) => {
-                return (
-                    validSelected(state.filter.selectedArticles, article) &&
-                    validDateRange(state.filter.dateRange, article)
-                );
-            }
-        )
+        articles: filtratedArticlesSelector(state)
     };
 };
 
