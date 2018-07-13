@@ -37,5 +37,5 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, filterGe
 });
 
 export const commentSelectorFactory = () => createSelector(commentsGetter, commentIdGetter, (comments, commentId) => {
-    return comments.find(comment => comment.id === commentId);
+    return comments[commentId];
 });
