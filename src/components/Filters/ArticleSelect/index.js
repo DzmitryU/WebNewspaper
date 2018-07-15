@@ -7,7 +7,7 @@ import 'react-select/dist/react-select.css'
 import './style.css';
 
 import {selectArticles} from '../../../ac';
-import {articleOptionsSelector} from '../../../selectors/article'
+import {articleOptionsSelector} from '../../../selectors/articles'
 
 class ArticleSelect extends React.Component {
     constructor(props) {

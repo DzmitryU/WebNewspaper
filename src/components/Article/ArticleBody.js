@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {articleSelectorFactory} from '../../selectors/article'
+import {articleSelectorFactory} from '../../selectors/articles'
 import CommentList from '../CommentList';
 
 function ArticleBody (props) {

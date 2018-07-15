@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {filtratedArticlesSelector} from '../selectors/article'
+import {filtratedArticlesSelector} from '../selectors/articles'
 
 import {loadAllArticles, loadComments} from '../ac';
 import Article from './Article';

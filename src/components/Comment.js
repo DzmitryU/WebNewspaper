@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {commentSelectorFactory} from '../selectors/comment';
+import {commentSelectorFactory} from '../selectors/comments';
 
 class Comment extends React.Component {
     constructor(props) {
