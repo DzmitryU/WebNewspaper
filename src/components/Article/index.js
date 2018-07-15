@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentList from './CommentList';
+import ArticleBody from './ArticleBody'
 
 function getBody (article, isOpen) {
-    return isOpen ? (
-            <div>
-                <div>{article.text}</div>
-                <h3>{article.date}</h3>
-                <CommentList comments={article.comments}/>
-            </div>)
-        : null;
+    return isOpen ? (<ArticleBody articleId={article.id} article={article}/>) : null;
 };
 
 function Article (props) {

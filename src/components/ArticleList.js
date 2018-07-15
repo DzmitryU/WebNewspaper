@@ -5,6 +5,7 @@ import {filtratedArticlesSelector} from '../selectors'
 
 import {loadAllArticles, loadComments} from '../ac';
 import Article from './Article';
+
 import Accordion from '../decorators/accordion';
 
 import {articles, comments} from '../data/mock';
