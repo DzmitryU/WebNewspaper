@@ -20,9 +20,9 @@ function validDateRange(range, article) {
 }
 
 const filterGetter = state => state.filter;
+
 const articlesGetter = state => state.articles;
-const commentsGetter = state => state.comments;
-const commentIdGetter = (state, props) => props.commentId;
+const articleIdGetter = (state, props) => props.articleId;
 
 export const filtratedArticlesSelector = createSelector(articlesGetter, filterGetter, (articles, filter) => {
     const {selectedArticles, dateRange} = filter;
@@ -36,6 +36,6 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, filterGe
     );
 });
 
-export const commentSelectorFactory = () => createSelector(commentsGetter, commentIdGetter, (comments, commentId) => {
-    return comments[commentId];
+export const articleSelectorFactory = () => createSelector(articlesGetter, articleIdGetter, (articles, articleId) => {
+    return articles.find((article) => article.id === articleId);
 });

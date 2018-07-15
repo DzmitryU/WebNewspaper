@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ArticleBody from './ArticleBody'
 
 function getBody (article, isOpen) {
-    return isOpen ? (<ArticleBody articleId={article.id} article={article}/>) : null;
+    return isOpen ? (<ArticleBody articleId={article.id} />) : null;
 };
 
 function Article (props) {
@@ -25,9 +25,8 @@ function Article (props) {
 Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        date: PropTypes.string,
-        comments: PropTypes.arrayOf(PropTypes.string)
+        id: PropTypes.string.isRequired,
+        date: PropTypes.string
     }).isRequired,
     isOpen: PropTypes.bool.isRequired,
     toggleOpen: PropTypes.func.isRequired

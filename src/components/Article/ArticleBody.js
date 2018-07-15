@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+import {articleSelectorFactory} from '../../selectors/article'
 import CommentList from '../CommentList';
 
 function ArticleBody (props) {
@@ -22,4 +25,11 @@ ArticleBody.propTypes = {
     articleId: PropTypes.string.isRequired
 };
 
-export default ArticleBody;
+const mapStateToProps = (state, ownProps) => {
+    const articleSelector = articleSelectorFactory();
+    return {
+        article: articleSelector(state, ownProps)
+    };
+};
+
+export default connect(mapStateToProps)(ArticleBody);
