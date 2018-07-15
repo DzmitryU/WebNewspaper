@@ -1,12 +1,10 @@
 import {LOAD_COMMENTS} from '../constants';
+import {arrayToMap} from '../services/CollectionUtils';
 
 export default (commentsState = [], action) => {
     switch (action.type) {
         case LOAD_COMMENTS: {
-            commentsState = action.payload.comments.reduce((map, comment) => {
-                map[comment.id] = comment;
-                return map;
-            }, {});
+            commentsState = arrayToMap(action.payload.comments);
             break;
         }
     }

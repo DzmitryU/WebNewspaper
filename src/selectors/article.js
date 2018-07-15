@@ -1,5 +1,6 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import moment from "moment/moment";
+import {mapToArray} from '../services/CollectionUtils';
 
 function validSelected(articles, article) {
     return (
@@ -26,7 +27,7 @@ const articleIdGetter = (state, props) => props.articleId;
 
 export const filtratedArticlesSelector = createSelector(articlesGetter, filterGetter, (articles, filter) => {
     const {selectedArticles, dateRange} = filter;
-    return articles.filter(
+    return mapToArray(articles).filter(
         (article) => {
             return (
                 validSelected(selectedArticles, article) &&
@@ -37,5 +38,12 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, filterGe
 });
 
 export const articleSelectorFactory = () => createSelector(articlesGetter, articleIdGetter, (articles, articleId) => {
-    return articles.find((article) => article.id === articleId);
+    return articles[articleId];
+});
+
+export const articleOptionsSelector = createSelector(articlesGetter, (articles) => {
+    const articleOptions = mapToArray(articles).map((article) => ({
+        value: article.id, label: article.title
+    }));
+    return articleOptions;
 });
