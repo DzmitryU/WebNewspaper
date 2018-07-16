@@ -12,6 +12,7 @@ export default (commentsState = [], action) => {
                 ...action.payload.comment,
                 id: action.commentId
             };
+            commentsState = {...commentsState};
             break;
         }
     }

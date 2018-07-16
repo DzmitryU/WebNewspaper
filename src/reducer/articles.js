@@ -9,7 +9,7 @@ export default (articlesState = [], action) => {
         }
         case ADD_COMMENT: {
             articlesState[action.payload.articleId].comments.push(action.commentId);
-            articlesState = {...articlesState};
+            articlesState[action.payload.articleId] = {...articlesState[action.payload.articleId]};
             break;
         }
     }
