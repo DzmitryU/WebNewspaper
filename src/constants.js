@@ -7,4 +7,7 @@ export const SELECT_ARTICLES = 'SELECT_ARTICLES';
 
 // articles
 export const LOAD_ALL_ARTICLES = 'LOAD_ALL_ARTICLES';
+
+// comments
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
+export const ADD_COMMENT = 'ADD_COMMENT';

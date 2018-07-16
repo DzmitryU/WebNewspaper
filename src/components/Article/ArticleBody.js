@@ -10,7 +10,7 @@ function ArticleBody (props) {
         <div>
             <div>{props.article.text}</div>
             <h3>{props.article.date}</h3>
-            <CommentList comments={ props.article.comments}/>
+            <CommentList comments={props.article.comments} articleId={props.articleId}/>
         </div>
     );
 };

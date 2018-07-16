@@ -1,4 +1,4 @@
-import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT} from '../constants';
+import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT, ADD_COMMENT} from '../constants';
 
 export function increment() {
     return {
@@ -26,6 +26,13 @@ export function loadComments(comments) {
         payload: {comments}
     }
 };
+
+export function addComment(comment, articleId) {
+    return {
+        type: ADD_COMMENT,
+        payload: {comment, articleId}
+    }
+}
 
 export function setDateRange(range) {
     return {

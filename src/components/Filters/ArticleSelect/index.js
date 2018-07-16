@@ -60,7 +60,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         selectArticles: (articles) => {
-            dispatch(selectArticles(articles))
+            dispatch(selectArticles(articles));
         }
     };
 };

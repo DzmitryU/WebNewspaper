@@ -5,7 +5,7 @@ import ToggleOpen from '../decorators/toggleOpen';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 
-function getBody(comments, isOpen) {
+function getBody(comments, isOpen, articleId) {
     if (!isOpen) {
         return null;
     }
@@ -21,13 +21,13 @@ function getBody(comments, isOpen) {
             <ul>
                 {commentElements}
             </ul>
-            <CommentForm/>
+            <CommentForm articleId={articleId}/>
         </div>
     );
 };
 
 function CommentList (props) {
-    const body = getBody(props.comments, props.isOpen);
+    const body = getBody(props.comments, props.isOpen, props.articleId);
     return (
         <div>
             <button onClick={props.toggleOpen}>
