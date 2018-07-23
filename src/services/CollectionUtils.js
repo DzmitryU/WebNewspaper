@@ -6,7 +6,4 @@ export const arrayToMap = (array) => {
     return map;
 };
 
-export const mapToArray = (map) => {
-    const array = Array.from(Object.values(map));
-    return array;
-};
+export const mapToArray = (map) => Array.from(Object.values(map));

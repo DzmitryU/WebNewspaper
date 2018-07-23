@@ -32,7 +32,7 @@ class CommentForm extends React.Component {
         });
     };
 
-    handleSubmit = (ev) => {
+    handleSubmit = () => {
         this.props.addComment(this.state);
         this.setState({
             ...DEFAULT_STATE
