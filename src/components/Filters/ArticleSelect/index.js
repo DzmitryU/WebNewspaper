@@ -7,6 +7,7 @@ import 'react-select/dist/react-select.css'
 import './style.css';
 
 import {selectArticles} from '../../../ac';
+import {articleOptionsSelector} from '../../../selectors/articles'
 
 class ArticleSelect extends React.Component {
     constructor(props) {
@@ -17,11 +18,6 @@ class ArticleSelect extends React.Component {
         this.props.selectArticles(articles.map(article => article.value));
     };
 
-    articlesToOptions = (articles) => {
-        return articles.map((article) => ({
-            value: article.id, label: article.title
-        }));
-    };
 
 
     render() {
@@ -30,7 +26,7 @@ class ArticleSelect extends React.Component {
                 value={this.props.selectedArticles}
                 onChange={this.handleChange}
                 multi={true}
-                options={this.articlesToOptions(this.props.articles)}
+                options={this.props.articleOptions}
             />
         );
     }
@@ -39,10 +35,10 @@ class ArticleSelect extends React.Component {
 
 // TODO define articles and selectedArticles in one place
 ArticleSelect.propTypes = {
-    articles: PropTypes.arrayOf(
+    articleOptions: PropTypes.arrayOf(
         PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
         })
     ),
     selectedArticles: PropTypes.arrayOf(PropTypes.string),
@@ -50,13 +46,13 @@ ArticleSelect.propTypes = {
 };
 
 ArticleSelect.defaultProps = {
-    articles: [],
+    articleOptions: [],
     selectedArticles: []
 };
 
 const mapStateToProps = state => {
     return {
-        articles: state.articles,
+        articleOptions: articleOptionsSelector(state),
         selectedArticles: state.filter.selectedArticles
     };
 };
@@ -64,7 +60,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         selectArticles: (articles) => {
-            dispatch(selectArticles(articles))
+            dispatch(selectArticles(articles));
         }
     };
 };

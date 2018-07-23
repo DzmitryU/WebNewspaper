@@ -5,14 +5,14 @@ import ToggleOpen from '../decorators/toggleOpen';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 
-function getBody(comments, isOpen) {
+function getBody(comments, isOpen, articleId) {
     if (!isOpen) {
         return null;
     }
-    const commentElements = comments.map((comment) => {
+    const commentElements = comments.map((id) => {
         return (
-            <li key={comment.id}>
-                <Comment comment={comment}/>
+            <li key={id}>
+                <Comment commentId={id}/>
             </li>
         )
     });
@@ -21,13 +21,13 @@ function getBody(comments, isOpen) {
             <ul>
                 {commentElements}
             </ul>
-            <CommentForm/>
+            <CommentForm articleId={articleId}/>
         </div>
     );
 };
 
 function CommentList (props) {
-    const body = getBody(props.comments, props.isOpen);
+    const body = getBody(props.comments, props.isOpen, props.articleId);
     return (
         <div>
             <button onClick={props.toggleOpen}>
@@ -40,7 +40,7 @@ function CommentList (props) {
 };
 
 CommentList.propTypes = {
-    comments: PropTypes.array
+    comments: PropTypes.arrayOf(PropTypes.string)
 };
 
 CommentList.defaultProps = {

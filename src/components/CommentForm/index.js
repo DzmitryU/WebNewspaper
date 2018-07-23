@@ -1,18 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
 import './style.css';
 
 import COMMENT_RULES from '../../rules/comment';
+import {addComment} from '../../ac';
+
+const DEFAULT_STATE = {
+    user: '',
+    text: ''
+};
 
 class CommentForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            user: '',
-            text: ''
-        };
+        this.state = DEFAULT_STATE;
         this.handleChangeText = this.handleChangeText.bind(this);
         this.handleChangeUser = this.handleChangeUser.bind(this);
-        console.log(COMMENT_RULES);
     }
 
     handleChangeUser = (ev) => {
@@ -27,6 +32,13 @@ class CommentForm extends React.Component {
         });
     };
 
+    handleSubmit = () => {
+        this.props.addComment(this.state);
+        this.setState({
+            ...DEFAULT_STATE
+        });
+    };
+
     validate = (string, rule) => {
         return string.length >= rule.MIN_LENGTH && string.length <= rule.MAX_LENGTH;
     };
@@ -36,7 +48,6 @@ class CommentForm extends React.Component {
     };
 
     isTextValid = (text) => {
-        console.log(text.length);
         return this.validate(text, COMMENT_RULES.TEXT);
     };
 
@@ -65,10 +76,23 @@ class CommentForm extends React.Component {
                         />
                     </p>
                 </section>
-                <button>Submit</button>
+                <button onClick={this.handleSubmit}>Submit</button>
             </div>
         );
     }
 }
 
-export default CommentForm;
+CommentForm.propTypes = {
+    addComment: PropTypes.func.isRequired,
+    articleId: PropTypes.string.isRequired
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        addComment: (comment) => {
+            dispatch(addComment(comment, ownProps.articleId));
+        }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(CommentForm);

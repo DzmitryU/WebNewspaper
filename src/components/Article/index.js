@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentList from './CommentList';
+import ArticleBody from './ArticleBody'
 
 function getBody (article, isOpen) {
-    return isOpen ? (
-            <div>
-                <div>{article.text}</div>
-                <h3>{article.date}</h3>
-                <CommentList comments={article.commentItems}/>
-            </div>)
-        : null;
+    return isOpen ? (<ArticleBody articleId={article.id} />) : null;
 };
 
 function Article (props) {
@@ -31,9 +25,8 @@ function Article (props) {
 Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        text: PropTypes.string.isRequired,
-        date: PropTypes.string,
-        commentItems: PropTypes.array
+        id: PropTypes.string.isRequired,
+        date: PropTypes.string
     }).isRequired,
     isOpen: PropTypes.bool.isRequired,
     toggleOpen: PropTypes.func.isRequired

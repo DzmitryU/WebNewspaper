@@ -1,7 +1,10 @@
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import reducer from '../reducer';
+import idGenerator from '../middlewares/idGenerator'
 
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStore(reducer, composeWithDevTools(applyMiddleware(idGenerator)));
 
 export default store;
