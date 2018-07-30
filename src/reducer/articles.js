@@ -1,10 +1,11 @@
-import {LOAD_ALL_ARTICLES, ADD_COMMENT} from '../constants';
+import {LOAD_ALL_ARTICLES, ADD_COMMENT, LOAD_ARTICLES, SUCCESS} from '../constants';
 import {arrayToMap} from '../services/CollectionUtils';
 
 export default (articlesState = {}, action) => {
     switch (action.type) {
-        case LOAD_ALL_ARTICLES: {
-            articlesState = arrayToMap(action.payload.articles);
+        case LOAD_ALL_ARTICLES:
+        case LOAD_ARTICLES + SUCCESS: {
+            articlesState = arrayToMap(action.payload);
             break;
         }
         case ADD_COMMENT: {

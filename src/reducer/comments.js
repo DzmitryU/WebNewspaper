@@ -1,10 +1,10 @@
-import {LOAD_COMMENTS, ADD_COMMENT} from '../constants';
+import {LOAD_COMMENTS, ADD_COMMENT, SUCCESS} from '../constants';
 import {arrayToMap} from '../services/CollectionUtils';
 
 export default (commentsState = {}, action) => {
     switch (action.type) {
-        case LOAD_COMMENTS: {
-            commentsState = arrayToMap(action.payload.comments);
+        case LOAD_COMMENTS + SUCCESS: {
+            commentsState = arrayToMap(action.payload);
             break;
         }
         case ADD_COMMENT: {

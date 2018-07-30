@@ -1,4 +1,6 @@
-import {LOAD_ALL_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT, ADD_COMMENT} from '../constants';
+import {
+    LOAD_ALL_ARTICLES, LOAD_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT, ADD_COMMENT
+} from '../constants';
 
 export function increment() {
     return {
@@ -6,10 +8,10 @@ export function increment() {
     }
 }
 
-export function loadAllArticles(articles) {
+export function loadArticles() {
     return {
-        type: LOAD_ALL_ARTICLES,
-        payload: {articles}
+        type: LOAD_ARTICLES,
+        callAPI: '/api/article'
     }
 };
 
@@ -20,10 +22,10 @@ export function selectArticles(articles) {
     }
 };
 
-export function loadComments(comments) {
+export function loadComments() {
     return {
         type: LOAD_COMMENTS,
-        payload: {comments}
+        callAPI: '/api/comment'
     }
 };
 

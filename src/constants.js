@@ -7,7 +7,13 @@ export const SELECT_ARTICLES = 'SELECT_ARTICLES';
 
 // articles
 export const LOAD_ALL_ARTICLES = 'LOAD_ALL_ARTICLES';
+export const LOAD_ARTICLES = 'LOAD_ARTICLES';
 
 // comments
 export const LOAD_COMMENTS = 'LOAD_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
+
+// status
+export const START = '_START';
+export const SUCCESS = '_SUCCESS';
+export const FAIL = '_FAIL';

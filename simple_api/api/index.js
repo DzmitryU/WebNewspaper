@@ -4,9 +4,7 @@ var assign = require('object-assign');
 
 router.get('/article', function (req, res, next) {
     var articles = mocks.articles.map(function (article) {
-            return assign({}, article, {
-                text: undefined
-            })
+            return assign({}, article)
         }),
         limit = Number(req.query.limit) || articles.length,
         offset = Number(req.query.offset) || 0;
@@ -50,10 +48,7 @@ router.get('/comment', function (req, res, next) {
 
     var limit = Number(req.query.limit) || mocks.comments.length,
         offset = Number(req.query.offset) || 0;
-    res.json({
-        total: mocks.comments.length,
-        records: mocks.comments.slice(offset, limit + offset)
-    })
+    res.json(mocks.comments.slice(offset, limit + offset))
 });
 
 router.post('/comment', function (req, res, next) {

@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {filtratedArticlesSelector} from '../selectors/articles'
 
-import {loadAllArticles, loadComments} from '../ac';
+import {loadComments, loadArticles} from '../ac';
 import Article from './Article';
 
 import Accordion from '../decorators/accordion';
-
-import {articles, comments} from '../data/mock';
 
 function getArticleElement(article, openItemId, toggleOpenItem) {
     return (
@@ -28,8 +26,8 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.loadArticles(articles);
-        this.props.loadComments(comments);
+        this.props.loadArticles();
+        this.props.loadComments();
     }
 
     render() {
@@ -51,8 +49,8 @@ ArticleList.propTypes = {
     articles: PropTypes.array,
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired,
-    loadAllArticles: PropTypes.func,
-    loadArticles: PropTypes.func
+    loadArticles: PropTypes.func,
+    loadComments: PropTypes.func
 };
 
 ArticleList.defaultProps = {
@@ -68,9 +66,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadArticles: (articles) =>
-            dispatch(loadAllArticles(articles)),
+            dispatch(loadArticles(articles)),
         loadComments: (comments) =>
-            dispatch(loadComments(comments))
+            dispatch(loadComments(comments)),
     }
 };
 
