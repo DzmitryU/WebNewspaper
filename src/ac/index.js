@@ -1,10 +1,17 @@
 import {
-    LOAD_ALL_ARTICLES, LOAD_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT, ADD_COMMENT
+    LOAD_ARTICLES, SELECT_ARTICLES, SET_DATE_RANGE, LOAD_COMMENTS, INCREMENT, ADD_COMMENT, DELETE_ARTICLE
 } from '../constants';
 
 export function increment() {
     return {
         type: INCREMENT
+    }
+}
+
+export function deleteArticle(id) {
+    return {
+        type: DELETE_ARTICLE,
+        payload: id
     }
 }
 

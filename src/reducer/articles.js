@@ -1,6 +1,6 @@
 import {Record, OrderedMap} from 'immutable'
 
-import {ADD_COMMENT, LOAD_ARTICLES, SUCCESS} from '../constants';
+import {ADD_COMMENT, LOAD_ARTICLES, SUCCESS, DELETE_ARTICLE} from '../constants';
 import {arrayToMap} from '../services/CollectionUtils';
 
 const ArticleState = Record({
@@ -23,6 +23,10 @@ export default (articlesState = defaultState, action) => {
             articlesState[action.payload.articleId].comments.push(action.commentId);
             articlesState[action.payload.articleId] = {...articlesState[action.payload.articleId]};
             return articlesState;
+        }
+        case DELETE_ARTICLE: {
+            return articlesState
+                .set('entries', articlesState.entries.delete(action.payload))
         }
         default: {
             return articlesState;
