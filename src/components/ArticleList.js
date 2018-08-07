@@ -5,6 +5,7 @@ import {filtratedArticlesSelector} from '../selectors/articles'
 
 import {loadComments, loadArticles} from '../ac';
 import Article from './Article';
+import Loader from './Loader';
 
 import Accordion from '../decorators/accordion';
 
@@ -23,6 +24,8 @@ function getArticleElement(article, openItemId, toggleOpenItem) {
 class ArticleList extends React.Component {
     constructor(props) {
         super(props);
+
+        this.getBody = this.getBody.bind(this);
     }
 
     componentDidMount() {
@@ -30,18 +33,27 @@ class ArticleList extends React.Component {
         this.props.loadComments();
     }
 
+    getBody() {
+        let body;
+        if (this.props.loading) {
+            body = (<Loader/>);
+        } else {
+            const articleElements =
+                this.props.articles.map(
+                    (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
+                );
+            body = (
+                <ul>
+                    {articleElements}
+                </ul>
+            );
+        }
+        return body;
+    }
+
     render() {
         console.log('Update Article List');
-        const articleElements =
-            this.props.articles.map(
-                (article) => getArticleElement(article, this.props.openItemId, this.props.toggleOpenItem)
-            );
-
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        );
+        return this.getBody();
     }
 };
 
@@ -50,16 +62,19 @@ ArticleList.propTypes = {
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired,
     loadArticles: PropTypes.func,
-    loadComments: PropTypes.func
+    loadComments: PropTypes.func,
+    loading: PropTypes.bool
 };
 
 ArticleList.defaultProps = {
-    articles: []
+    articles: [],
+    loading: false
 };
 
 const mapStateToProps = state => {
     return {
-        articles: filtratedArticlesSelector(state)
+        articles: filtratedArticlesSelector(state),
+        loading: state.loading
     };
 };
 
