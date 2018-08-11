@@ -39,7 +39,8 @@ export function loadComments() {
 export function addComment(comment, articleId) {
     return {
         type: ADD_COMMENT,
-        payload: {comment, articleId}
+        payload: {comment, articleId},
+        generateId: true
     }
 }
 

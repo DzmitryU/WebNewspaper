@@ -29,8 +29,10 @@ class ArticleList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.loadArticles();
-        this.props.loadComments();
+        if (!(this.props.loaded || this.props.loading)) {
+            this.props.loadArticles();
+            this.props.loadComments();
+        }
     }
 
     getBody() {
@@ -63,18 +65,21 @@ ArticleList.propTypes = {
     toggleOpenItem: PropTypes.func.isRequired,
     loadArticles: PropTypes.func,
     loadComments: PropTypes.func,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool
 };
 
 ArticleList.defaultProps = {
     articles: [],
-    loading: false
+    loading: false,
+    loaded: false
 };
 
 const mapStateToProps = state => {
     return {
         articles: filtratedArticlesSelector(state),
-        loading: state.loading
+        loading: state.articles.loading,
+        loaded: state.articles.loaded
     };
 };
 

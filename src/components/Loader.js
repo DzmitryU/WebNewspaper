@@ -1,9 +1,10 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 
-function Counter () {
+function Loader () {
     return (
-        <div>Loading...</div>
+       <ReactLoading type={'spokes'} color={'#2f4ca3'} />
     );
 }
 
-export default Counter;
+export default Loader;
