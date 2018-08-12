@@ -6,6 +6,7 @@ export default store => next => action => {
     }
 
     setTimeout(() => {
+        console.log('Data loading...');
         fetch(action.callAPI)
             .then(response => response.json())
             .catch((err) => {

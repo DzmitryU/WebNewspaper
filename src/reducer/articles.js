@@ -3,19 +3,29 @@ import {Record, OrderedMap} from 'immutable'
 import {ADD_COMMENT, LOAD_ARTICLES, SUCCESS, DELETE_ARTICLE, START} from '../constants';
 import {arrayToMap} from '../services/CollectionUtils';
 
-const ArticleState = Record({
+const ArticlesState = Record({
     loading: false,
     loaded: false,
     entries: new OrderedMap({})
 });
 
-const defaultState = new ArticleState();
+const ArticleRecord = Record({
+    id: undefined,
+    title: '',
+    text: undefined,
+    date: undefined,
+    comments: [],
+    commentsLoading: false,
+    commentsLoaded: false
+});
+
+const defaultState = new ArticlesState();
 
 export default (articlesState = defaultState, action) => {
     switch (action.type) {
         case LOAD_ARTICLES + SUCCESS: {
             return articlesState
-                .set('entries', arrayToMap(action.payload))
+                .set('entries', arrayToMap(action.payload, ArticleRecord))
                 .set('loading', false)
                 .set('loaded', true);
         }
@@ -23,13 +33,15 @@ export default (articlesState = defaultState, action) => {
             return articlesState.set('loading', true);
         }
         case ADD_COMMENT: {
-            articlesState[action.payload.articleId].comments.push(action.commentId);
-            articlesState[action.payload.articleId] = {...articlesState[action.payload.articleId]};
-            return articlesState;
+            return articlesState
+                .updateIn(
+                    ['entries', action.payload.articleId, 'comments'],
+                    comments => comments.concat(action.commentId)
+                );
         }
         case DELETE_ARTICLE: {
             return articlesState
-                .set('entries', articlesState.entries.delete(action.payload))
+                .deleteIn(['entries', action.payload])
         }
         default: {
             return articlesState;

@@ -1,20 +1,41 @@
-import {LOAD_COMMENTS, ADD_COMMENT, SUCCESS} from '../constants';
+import {LOAD_COMMENTS, ADD_COMMENT, SUCCESS, START} from '../constants';
 import {arrayToMap} from '../services/CollectionUtils';
+import {Record, OrderedMap} from 'immutable'
 
-export default (commentsState = {}, action) => {
+const CommentsState = Record({
+    loading: false,
+    loaded: false,
+    entries: new OrderedMap({})
+});
+
+const defaultState = new CommentsState();
+
+const CommentRecord = Record({
+    id: undefined,
+    text: undefined,
+    user: undefined
+});
+
+export default (commentsState = defaultState, action) => {
     switch (action.type) {
         case LOAD_COMMENTS + SUCCESS: {
-            commentsState = arrayToMap(action.payload);
-            break;
+            return commentsState
+                .set('entries', arrayToMap(action.payload, CommentRecord))
+                .set('loading', false)
+                .set('loaded', true);
+        }
+        case LOAD_COMMENTS + START: {
+            return commentsState.set('loading', true);
         }
         case ADD_COMMENT: {
-            commentsState[action.commentId] = {
-                ...action.payload.comment,
-                id: action.commentId
-            };
-            commentsState = {...commentsState};
-            break;
+            return commentsState
+                .setIn(
+                    ['entries', action.commentId],
+                    new CommentRecord({id: action.commentId, ...action.payload.comment})
+                );
+        }
+        default: {
+            return commentsState
         }
     }
-    return commentsState;
 }
