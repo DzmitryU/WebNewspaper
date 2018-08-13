@@ -13,8 +13,8 @@ function ArticleBody (props) {
             <CommentList
                 comments={props.article.comments}
                 articleId={props.articleId}
-                loading={props.loading}
-                loaded={props.loaded}/>
+                loading={props.article.commentsLoading}
+                loaded={props.article.commentsLoaded}/>
         </div>
     );
 };
@@ -24,24 +24,17 @@ ArticleBody.propTypes = {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         date: PropTypes.string,
-        comments: PropTypes.arrayOf(PropTypes.string)
+        comments: PropTypes.arrayOf(PropTypes.string),
+        loading: PropTypes.bool,
+        loaded: PropTypes.bool
     }).isRequired,
     articleId: PropTypes.string.isRequired,
-    loading: PropTypes.bool,
-    loaded: PropTypes.bool
-};
-
-ArticleBody.defaultProps = {
-    loading: false,
-    loaded: false
 };
 
 const mapStateToProps = (state, ownProps) => {
     const articleSelector = articleSelectorFactory();
     return {
-        article: articleSelector(state, ownProps),
-        loading: state.articles.loading,
-        loaded: state.articles.loaded
+        article: articleSelector(state, ownProps)
     };
 };
 

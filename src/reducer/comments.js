@@ -18,7 +18,7 @@ export default (commentsState = defaultState, action) => {
     switch (action.type) {
         case LOAD_COMMENTS + SUCCESS: {
             return commentsState
-                .set('entries', arrayToMap(action.payload, CommentRecord));
+                .set('entries', commentsState.entries.concat(arrayToMap(action.payload, CommentRecord)));
         }
         case ADD_COMMENT: {
             return commentsState

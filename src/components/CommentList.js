@@ -7,10 +7,14 @@ import {loadComments} from '../ac';
 
 import Comment from './Comment';
 import CommentForm from './CommentForm';
+import Loader from './Loader';
 
-function getBody(comments, isOpen, articleId) {
+function getBody(comments, isOpen, articleId, loading) {
     if (!isOpen) {
         return null;
+    }
+    if (loading) {
+        return <Loader/>
     }
     const commentElements = comments.map((id) => {
         return (
@@ -32,18 +36,20 @@ function getBody(comments, isOpen, articleId) {
 class CommentList extends React.Component {
     constructor(props) {
         super(props);
-    }
+    };
 
-    handleOpen = () => {
-        this.props.loadComments(this.props.articleId);
+    handleClick = () => {
+        if (!(this.props.isOpen || this.props.loading || this.props.loaded)) {
+            this.props.loadComments(this.props.articleId);
+        }
         this.props.toggleOpen();
-    }
+    };
 
     render() {
-        const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId);
+        const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId, this.props.loading);
         return (
             <div>
-                <button onClick={this.handleOpen}>
+                <button onClick={this.handleClick}>
                     {this.props.isOpen ? 'Hide comments' : 'Show comments'}
                 </button>
                 {body}
