@@ -10,7 +10,11 @@ function ArticleBody (props) {
         <div>
             <div>{props.article.text}</div>
             <h3>{props.article.date}</h3>
-            <CommentList comments={props.article.comments} articleId={props.articleId}/>
+            <CommentList
+                comments={props.article.comments}
+                articleId={props.articleId}
+                loading={props.loading}
+                loaded={props.loaded}/>
         </div>
     );
 };
@@ -22,13 +26,22 @@ ArticleBody.propTypes = {
         date: PropTypes.string,
         comments: PropTypes.arrayOf(PropTypes.string)
     }).isRequired,
-    articleId: PropTypes.string.isRequired
+    articleId: PropTypes.string.isRequired,
+    loading: PropTypes.bool,
+    loaded: PropTypes.bool
+};
+
+ArticleBody.defaultProps = {
+    loading: false,
+    loaded: false
 };
 
 const mapStateToProps = (state, ownProps) => {
     const articleSelector = articleSelectorFactory();
     return {
-        article: articleSelector(state, ownProps)
+        article: articleSelector(state, ownProps),
+        loading: state.articles.loading,
+        loaded: state.articles.loaded
     };
 };
 

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
 import ToggleOpen from '../decorators/toggleOpen';
+import {loadComments} from '../ac';
 
 import Comment from './Comment';
 import CommentForm from './CommentForm';
@@ -26,25 +29,47 @@ function getBody(comments, isOpen, articleId) {
     );
 };
 
-function CommentList (props) {
-    const body = getBody(props.comments, props.isOpen, props.articleId);
-    return (
-        <div>
-            <button onClick={props.toggleOpen}>
-                {props.isOpen ? 'Hide comments' : 'Show comments'}
-            </button>
-            {body}
-        </div>
-    );
+class CommentList extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
+    handleOpen = () => {
+        this.props.loadComments(this.props.articleId);
+        this.props.toggleOpen();
+    }
+
+    render() {
+        const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId);
+        return (
+            <div>
+                <button onClick={this.handleOpen}>
+                    {this.props.isOpen ? 'Hide comments' : 'Show comments'}
+                </button>
+                {body}
+            </div>
+        );
+    }
 };
 
 CommentList.propTypes = {
-    comments: PropTypes.arrayOf(PropTypes.string)
+    comments: PropTypes.arrayOf(PropTypes.string),
+    loadComments: PropTypes.func.isRequired,
+    loaded: PropTypes.bool,
+    loading: PropTypes.bool,
+    articleId: PropTypes.string.isRequired
 };
 
 CommentList.defaultProps = {
-    comments: []
+    comments: [],
+    loaded: false,
+    loading: false
 };
 
-export default ToggleOpen(CommentList);
+const mapDispatchToProps = dispatch => {
+    return {
+        loadComments: (articleId) => dispatch(loadComments(articleId))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(ToggleOpen(CommentList));

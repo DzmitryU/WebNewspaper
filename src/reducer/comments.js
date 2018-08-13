@@ -3,8 +3,6 @@ import {arrayToMap} from '../services/CollectionUtils';
 import {Record, OrderedMap} from 'immutable'
 
 const CommentsState = Record({
-    loading: false,
-    loaded: false,
     entries: new OrderedMap({})
 });
 
@@ -20,12 +18,7 @@ export default (commentsState = defaultState, action) => {
     switch (action.type) {
         case LOAD_COMMENTS + SUCCESS: {
             return commentsState
-                .set('entries', arrayToMap(action.payload, CommentRecord))
-                .set('loading', false)
-                .set('loaded', true);
-        }
-        case LOAD_COMMENTS + START: {
-            return commentsState.set('loading', true);
+                .set('entries', arrayToMap(action.payload, CommentRecord));
         }
         case ADD_COMMENT: {
             return commentsState

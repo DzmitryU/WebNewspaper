@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {filtratedArticlesSelector} from '../selectors/articles'
 
-import {loadComments, loadArticles} from '../ac';
+import {loadArticles} from '../ac';
 import Article from './Article';
 import Loader from './Loader';
 
@@ -31,7 +31,6 @@ class ArticleList extends React.Component {
     componentDidMount() {
         if (!(this.props.loaded || this.props.loading)) {
             this.props.loadArticles();
-            this.props.loadComments();
         }
     }
 
@@ -64,7 +63,6 @@ ArticleList.propTypes = {
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired,
     loadArticles: PropTypes.func,
-    loadComments: PropTypes.func,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
 };
@@ -87,8 +85,6 @@ const mapDispatchToProps = dispatch => {
     return {
         loadArticles: (articles) =>
             dispatch(loadArticles(articles)),
-        loadComments: (comments) =>
-            dispatch(loadComments(comments)),
     }
 };
 

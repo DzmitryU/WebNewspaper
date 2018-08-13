@@ -29,10 +29,12 @@ export function selectArticles(articles) {
     }
 };
 
-export function loadComments() {
+export function loadComments(articleId) {
+    const commentCallAPI = '/api/comment';
     return {
         type: LOAD_COMMENTS,
-        callAPI: '/api/comment'
+        callAPI: articleId ? (commentCallAPI + `?article=${articleId}`) : commentCallAPI,
+        payload: {articleId: articleId}
     }
 };
 
