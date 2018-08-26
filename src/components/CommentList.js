@@ -38,9 +38,9 @@ class CommentList extends React.Component {
         super(props);
     };
 
-     componentWillReceiveProps(nextProps) {
-        if (!this.props.isOpen && nextProps.isOpen && !(nextProps.loading || nextProps.loaded)) {
-            nextProps.loadComments(nextProps.articleId);
+    componentDidUpdate(prevProps) {
+        if (!prevProps.isOpen && this.props.isOpen && !(this.props.loading || this.props.loaded)) {
+            this.props.loadComments(this.props.articleId);
         }
     }
 
