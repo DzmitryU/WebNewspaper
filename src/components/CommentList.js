@@ -38,18 +38,17 @@ class CommentList extends React.Component {
         super(props);
     };
 
-    handleClick = () => {
-        if (!(this.props.isOpen || this.props.loading || this.props.loaded)) {
-            this.props.loadComments(this.props.articleId);
+     componentWillReceiveProps(nextProps) {
+        if (!this.props.isOpen && nextProps.isOpen && !(nextProps.loading || nextProps.loaded)) {
+            nextProps.loadComments(nextProps.articleId);
         }
-        this.props.toggleOpen();
-    };
+    }
 
     render() {
         const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId, this.props.loading);
         return (
             <div>
-                <button onClick={this.handleClick}>
+                <button onClick={this.props.toggleOpen}>
                     {this.props.isOpen ? 'Hide comments' : 'Show comments'}
                 </button>
                 {body}
@@ -63,13 +62,15 @@ CommentList.propTypes = {
     loadComments: PropTypes.func.isRequired,
     loaded: PropTypes.bool,
     loading: PropTypes.bool,
+    isOpen: PropTypes.bool,
     articleId: PropTypes.string.isRequired
 };
 
 CommentList.defaultProps = {
     comments: [],
     loaded: false,
-    loading: false
+    loading: false,
+    isOpen: false
 };
 
 const mapDispatchToProps = dispatch => {
