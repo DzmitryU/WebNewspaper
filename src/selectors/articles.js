@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import moment from "moment/moment";
-import {mapToArray} from '../services/CollectionUtils';
+import {mapToArray} from '../services/utils/Collections';
 
 function validSelected(articles, article) {
     return (

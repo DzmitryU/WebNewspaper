@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import ToggleOpen from '../decorators/toggleOpen';
-import {loadComments} from '../ac';
+import {loadArticleComments} from '../ac/comment';
 
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import Loader from './Loader';
 
-function getBody(comments, isOpen, articleId, loading) {
-    if (!isOpen) {
+function getBody(comments, isOpen, articleId, loading, loaded) {
+    if (!isOpen || !(loading || loaded)) {
         return null;
     }
     if (loading) {
@@ -40,12 +40,12 @@ class CommentList extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (!prevProps.isOpen && this.props.isOpen && !(this.props.loading || this.props.loaded)) {
-            this.props.loadComments(this.props.articleId);
+            this.props.loadArticleComments(this.props.articleId);
         }
     }
 
     render() {
-        const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId, this.props.loading);
+        const body = getBody(this.props.comments, this.props.isOpen, this.props.articleId, this.props.loading, this.props.loaded);
         return (
             <div>
                 <button onClick={this.props.toggleOpen}>
@@ -59,7 +59,7 @@ class CommentList extends React.Component {
 
 CommentList.propTypes = {
     comments: PropTypes.arrayOf(PropTypes.string),
-    loadComments: PropTypes.func.isRequired,
+    loadArticleComments: PropTypes.func.isRequired,
     loaded: PropTypes.bool,
     loading: PropTypes.bool,
     isOpen: PropTypes.bool,
@@ -75,7 +75,7 @@ CommentList.defaultProps = {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadComments: (articleId) => dispatch(loadComments(articleId))
+        loadArticleComments: (articleId) => dispatch(loadArticleComments(articleId))
     }
 };
 

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import 'react-day-picker/lib/style.css';
 import './style.css';
 
-import {setDateRange} from '../../../ac';
+import {setDateRange} from '../../../ac/filter';
 
 class DateRangePicker extends React.Component{
     constructor(props) {

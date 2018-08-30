@@ -1,7 +1,7 @@
 import {Record, OrderedMap} from 'immutable'
 
 import {ADD_COMMENT, LOAD_ARTICLES, SUCCESS, DELETE_ARTICLE, START, LOAD_COMMENTS} from '../constants';
-import {arrayToMap} from '../services/CollectionUtils';
+import {arrayToMap} from '../services/utils/Collections';
 
 const ArticlesState = Record({
     loading: false,
@@ -34,11 +34,11 @@ export default (articlesState = defaultState, action) => {
         }
         case LOAD_COMMENTS + SUCCESS: {
             return articlesState
-                .setIn(['entries', action.articleId, 'commentsLoading'], false)
-                .setIn(['entries', action.articleId, 'commentsLoaded'], true);
+                .setIn(['entries', action.id, 'commentsLoading'], false)
+                .setIn(['entries', action.id, 'commentsLoaded'], true);
         }
         case LOAD_COMMENTS + START: {
-            return articlesState.setIn(['entries', action.articleId, 'commentsLoading'], true);
+            return articlesState.setIn(['entries', action.id, 'commentsLoading'], true);
         }
         case ADD_COMMENT: {
             return articlesState

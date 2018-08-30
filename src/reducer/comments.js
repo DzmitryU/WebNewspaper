@@ -1,5 +1,5 @@
-import {LOAD_COMMENTS, ADD_COMMENT, SUCCESS, START} from '../constants';
-import {arrayToMap} from '../services/CollectionUtils';
+import { LOAD_COMMENTS, ADD_COMMENT, SUCCESS } from '../constants';
+import {arrayToMap} from '../services/utils/Collections';
 import {Record, OrderedMap} from 'immutable'
 
 const CommentsState = Record({

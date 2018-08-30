@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {filtratedArticlesSelector} from '../selectors/articles'
 
-import {loadArticles} from '../ac';
+import {loadArticles} from '../ac/article';
 import Article from './Article';
 import Loader from './Loader';
 
@@ -54,6 +54,7 @@ class ArticleList extends React.Component {
 
     render() {
         console.log('Update Article List');
+        console.log(this.props);
         return this.getBody();
     }
 };
