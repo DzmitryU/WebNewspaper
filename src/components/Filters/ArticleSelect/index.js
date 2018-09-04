@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import 'react-select/dist/react-select.css'
 import './style.css';
 
-import {selectArticles} from '../../../ac';
+import {selectArticles} from '../../../ac/filter';
 import {articleOptionsSelector} from '../../../selectors/articles'
 
 class ArticleSelect extends React.Component {

@@ -3,19 +3,27 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {commentSelectorFactory} from '../selectors/comments';
 
+function getBody(comment) {
+    if (!comment) {
+        return null;
+    }
+    return (
+        <div>
+            <div>{comment.text}</div>
+            <h4>{comment.user}</h4>
+        </div>
+    )
+}
+
 class Comment extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        console.log('render comment: ', this.props.comment.id);
-        return (
-            <div>
-                <div>{this.props.comment.text}</div>
-                <h4>{this.props.comment.user}</h4>
-            </div>
-        );
+        console.log('render comment: ', this.props.commentId);
+        const body = getBody(this.props.comment);
+        return body;
     }
 };
 

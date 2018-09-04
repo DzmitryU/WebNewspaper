@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 import COMMENT_RULES from '../../rules/comment';
-import {addComment} from '../../ac';
+import {addComment} from '../../ac/comment';
 
 const DEFAULT_STATE = {
     user: '',

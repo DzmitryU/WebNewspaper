@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import moment from "moment/moment";
-import {mapToArray} from '../services/CollectionUtils';
+import {mapToArray} from '../services/utils/Collections';
 
 function validSelected(articles, article) {
     return (
@@ -22,7 +22,7 @@ function validDateRange(range, article) {
 
 const filterGetter = state => state.filter;
 
-const articlesGetter = state => state.articles;
+const articlesGetter = state => state.articles.entries;
 const articleIdGetter = (state, props) => props.articleId;
 
 export const filtratedArticlesSelector = createSelector(articlesGetter, filterGetter, (articles, filter) => {
@@ -38,7 +38,7 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, filterGe
 });
 
 export const articleSelectorFactory = () => createSelector(articlesGetter, articleIdGetter, (articles, articleId) => {
-    return articles[articleId];
+    return articles.get(articleId);
 });
 
 export const articleOptionsSelector = createSelector(articlesGetter, (articles) => {
