@@ -1,16 +1,20 @@
-import React from 'react'
-import ArticleList from './ArticleList'
-import CommentService from '../services/CommentService'
-
-import { articles, comments } from '../data/mock'
+import React from 'react';
+import store from '../store';
+import {Provider} from 'react-redux';
+import ArticleList from './ArticleList';
+import Filter from './Filters';
+import Counter from './Counter';
 
 function App() {
-    const commentedArticles = CommentService.fillArticles(articles, comments);
     return (
-        <ArticleList
-            articles={commentedArticles}
-        />
-    )
+        <Provider store={store}>
+            <div>
+                <Counter/>
+                <Filter/>
+                <ArticleList/>
+            </div>
+        </Provider>
+    );
 }
 
 export default App

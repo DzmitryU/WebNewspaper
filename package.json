@@ -8,10 +8,20 @@
     "build": "webpack"
   },
   "dependencies": {
+    "immutable": "^3.8.2",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "react-router": "^4.3.1"
+    "react-router": "^4.3.1",
+    "react-day-picker": "^7.1.9",
+    "react-loading": "^2.0.3",
+    "react-redux": "^5.0.7",
+    "react-select": "^1.2.1",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^3.0.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
@@ -22,6 +32,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "concurrently": "^3.5.0",
     "css-loader": "^0.28.4",
+    "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.18.2",
     "webpack": "^2.0.0",
     "webpack-cli": "^3.0.3",
