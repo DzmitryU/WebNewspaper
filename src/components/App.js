@@ -1,18 +1,24 @@
 import React from 'react';
 import store from '../store';
 import {Provider} from 'react-redux';
-import ArticleList from './ArticleList';
-import Filter from './Filters';
-import Counter from './Counter';
+import Main from './Main';
+import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 
 function App() {
     return (
         <Provider store={store}>
-            <div>
-                <Counter/>
-                <Filter/>
-                <ArticleList/>
-            </div>
+            <Router>
+                <div>
+                    <div>
+                        <h2>Main Menu</h2>
+                        <div><NavLink to='/main' activeStyle={{color: 'red'}}>Main Page</NavLink></div>
+                        <div><NavLink to='/articles' activeStyle={{color: 'red'}}>Articles Page</NavLink></div>
+                        <div><NavLink to='/comments' activeStyle={{color: 'red'}}>Comments Page</NavLink></div>
+                    </div>
+                    <Route path='/main' component={Main}/>
+                </div>
+
+            </Router>
         </Provider>
     );
 }
