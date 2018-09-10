@@ -22,12 +22,13 @@ function validDateRange(range, article) {
 
 const filterGetter = state => state.filter;
 
-const articlesGetter = state => state.articles.entries;
+export const articlesGetter = state => state.articles.entries;
+export const articleListGetter = createSelector(articlesGetter, (articles) => mapToArray(articles));
 const articleIdGetter = (state, props) => props.articleId;
 
-export const filtratedArticlesSelector = createSelector(articlesGetter, filterGetter, (articles, filter) => {
+export const filtratedArticlesSelector = createSelector(articleListGetter, filterGetter, (articles, filter) => {
     const {selectedArticles, dateRange} = filter;
-    return mapToArray(articles).filter(
+    return articles.filter(
         (article) => {
             return (
                 validSelected(selectedArticles, article) &&
@@ -41,8 +42,8 @@ export const articleSelectorFactory = () => createSelector(articlesGetter, artic
     return articles.get(articleId);
 });
 
-export const articleOptionsSelector = createSelector(articlesGetter, (articles) => {
-    const articleOptions = mapToArray(articles).map((article) => ({
+export const articleOptionsSelector = createSelector(articleListGetter, (articles) => {
+    const articleOptions = articles.map((article) => ({
         value: article.id, label: article.title
     }));
     return articleOptions;

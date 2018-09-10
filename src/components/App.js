@@ -2,6 +2,7 @@ import React from 'react';
 import store from '../store';
 import {Provider} from 'react-redux';
 import Main from './Main';
+import ArticleMenu from './ArticleMenu';
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                         <div><NavLink to='/comments' activeStyle={{color: 'red'}}>Comments Page</NavLink></div>
                     </div>
                     <Route path='/main' component={Main}/>
+                    <Route path='/articles' component={ArticleMenu}/>
                 </div>
 
             </Router>
