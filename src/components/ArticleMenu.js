@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {NavLink} from 'react-router-dom'
+import {NavLink, Route} from 'react-router-dom'
 
 import {loadArticles} from '../ac/article';
 import {articleListGetter} from '../selectors/articles'
 import Loader from './Loader';
+import Article from './Article';
 
 function getArticleElement(article) {
     return (
@@ -15,7 +16,7 @@ function getArticleElement(article) {
     );
 }
 
-class ArticleList extends React.Component {
+class ArticleMenu extends React.Component {
     constructor(props) {
         super(props);
 
@@ -38,9 +39,13 @@ class ArticleList extends React.Component {
                     (article) => getArticleElement(article)
                 );
             body = (
-                <ul>
-                    {articleElements}
-                </ul>
+                <div>
+                    <ul>
+                        {articleElements}
+                    </ul>
+                    {/*<Route path='/articles/:id' component={Article}/>*/}
+                </div>
+
             );
         }
         return body;
@@ -53,13 +58,13 @@ class ArticleList extends React.Component {
     }
 };
 
-ArticleList.propTypes = {
+ArticleMenu.propTypes = {
     articles: PropTypes.array,
     loading: PropTypes.bool,
     loaded: PropTypes.bool
 };
 
-ArticleList.defaultProps = {
+ArticleMenu.defaultProps = {
     articles: [],
     loading: false,
     loaded: false
@@ -83,4 +88,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ArticleList);
+)(ArticleMenu);

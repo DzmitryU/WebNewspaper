@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleList from './ArticleList';
+import Articles from './Articles';
 import Filter from './Filters';
 import Counter from './Counter';
 
@@ -8,7 +8,7 @@ function Main() {
         <div>
             <Counter/>
             <Filter/>
-            <ArticleList/>
+            <Articles/>
         </div>
     );
 }

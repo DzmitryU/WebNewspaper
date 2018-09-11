@@ -21,7 +21,7 @@ function getArticleElement(article, openItemId, toggleOpenItem) {
     );
 }
 
-class ArticleList extends React.Component {
+class Articles extends React.Component {
     constructor(props) {
         super(props);
 
@@ -59,7 +59,7 @@ class ArticleList extends React.Component {
     }
 };
 
-ArticleList.propTypes = {
+Articles.propTypes = {
     articles: PropTypes.array,
     openItemId: PropTypes.string,
     toggleOpenItem: PropTypes.func.isRequired,
@@ -68,7 +68,7 @@ ArticleList.propTypes = {
     loaded: PropTypes.bool
 };
 
-ArticleList.defaultProps = {
+Articles.defaultProps = {
     articles: [],
     loading: false,
     loaded: false
@@ -92,4 +92,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Accordion(ArticleList));
+)(Accordion(Articles));
